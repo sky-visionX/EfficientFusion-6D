@@ -1,0 +1,14 @@
+git checkout branch Pytorch-1.0 
+
+# Error: AttributeError: module 'lib.knn.knn_pytorch' has no attribute 'knn'
+Solution: rebuild and unzip egg file then copy *so file and knn_pytorch.py to /densefusion/lib/knn
+root@cfde89f97b76:/densefusion/lib/knn# python setup.py install
+root@cfde89f97b76:/densefusion/lib/knn/dist# unzip knn_pytorch-0.1-py3.5-linux-x86_64.egg 
+
+#类似问题 https://www.jianshu.com/p/a8b29070b604
+
+# ImportError: cannot import name 'knn_pytorch' 修改../lib/knn/__init__.py中
+    修改前：from lib.knn import knn_pytorch
+    修改后：from lib.knn import knn_pytorch as knn_pytorch
+    https://github.com/j96w/DenseFusion/issues/33#issuecomment-507861600
+    https://github.com/j96w/DenseFusion/blob/master/lib/knn/__init__.py#L7
